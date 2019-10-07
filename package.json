@@ -13,7 +13,7 @@
     "build-spa": "webpack -p --config ./webpack.config.spa.js --mode production",
     "build-client": "webpack -p --config ./webpack.config.client.js --mode production",
     "build-server": "webpack -p --config ./webpack.config.server.js --mode production",
-    "build-prod": "yarn build-client && yarn build-server && yarn start",
+    "build-prod": "yarn build-client && yarn build-server",
     "serve": "serve ./dist",
     "heroku-postbuild": "yarn clean && yarn build-prod"
   },
