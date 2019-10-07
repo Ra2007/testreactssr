@@ -1,0 +1,60 @@
+.top-nav {
+  background-color: #4ebfd7;
+  height: 80px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  margin-top: 30px;
+  .logo-nav {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1 {
+      text-align: center;
+    }
+  }
+  .user-block {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    padding-left: 30px;
+    padding-right: 5px;
+    color: white;
+    .user-info-block {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      font-size: 18px;
+    }
+    .user-control-block {
+      border-top: 1px solid white;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      .button-top-right {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  .transfer-block {
+    display: grid;
+    justify-content: center;
+    align-items: flex-end;
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 10px;
+    a {
+      color: white;
+      &:hover {
+        color: #b7e0e9;
+      }
+    }
+  }
+}
+
+.app-container {
+  width: 100%;
+  max-width: 800px;
+  padding: 0 15px;
+  margin: 0 auto;
+}

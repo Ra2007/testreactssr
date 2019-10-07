@@ -1,0 +1,48 @@
+.user-list {
+  position: absolute;
+  border: 1px solid black;
+  width: 300px;
+  margin-top: -25px;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.input-wrap {
+}
+
+.user-item {
+  padding: 5px;
+  margin: 3px;
+  border-top: 1px solid black;
+  &:hover {
+    color: rgb(89, 89, 89);
+    cursor: pointer;
+  }
+  &:active {
+    opacity: 0.8;
+  }
+}
+.transaction-info-block {
+  margin-top: 30px;
+}
+
+.table-info {
+  padding: 5px;
+  color: rgb(130, 130, 130);
+  caption {
+    margin-bottom: 15px;
+    color: rgb(201, 201, 201);
+  }
+
+  td {
+    padding: 5px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.transaction-error {
+  color: red;
+  font-size: 14px;
+  margin-top: 15px;
+}
