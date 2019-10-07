@@ -7,13 +7,10 @@
   background-color: #ffffff;
 }
 
-.input-wrap {
-}
-
 .user-item {
   padding: 5px;
   margin: 3px;
-  border-top: 1px solid black;
+  border-bottom: 1px solid black;
   &:hover {
     color: rgb(89, 89, 89);
     cursor: pointer;
@@ -23,7 +20,8 @@
   }
 }
 .transaction-info-block {
-  margin-top: 30px;
+  position: absolute;
+  margin-top: 330px;
 }
 
 .table-info {

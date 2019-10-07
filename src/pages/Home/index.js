@@ -9,18 +9,30 @@ const Home = (props) => {
   } = props
 
   return !!token ? (
-    <div>
-      <h1>You can translate a currency or see the history of currency transfers</h1>
-      <Link to='/transfer'>Transfer</Link>
-      <br />
-      <Link to='/histori-transfer'>History</Link>
+    <div className='home-wrapp'>
+      <div className='text-home'>You can </div>
+
+      <Link className='text-home' to='/transfer'>
+        Transfer
+      </Link>
+      <div className='text-home'>a currency or see the</div>
+      <Link className='text-home' to='/histori-transfer'>
+        History
+      </Link>
+
+      <div className='text-home'>of currency transfers</div>
     </div>
   ) : (
-    <div>
-      <h1>The application is for Parrot Wings transfer </h1>
-      <Link to='/signup'>Sign Up</Link>
-      <br />
-      <Link to='/login'>Login</Link>
+    <div className='home-wrapp'>
+      <div className='text-home'>The application is for Parrot Wings transfer </div>
+      <div className='text-home'>for work it is necessary</div>
+      <Link className='text-home' to='/signup'>
+        Sign Up
+      </Link>
+      <div className='text-home'>or</div>
+      <Link className='text-home' to='/login'>
+        Login
+      </Link>
     </div>
   )
 }

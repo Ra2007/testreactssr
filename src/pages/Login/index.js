@@ -75,17 +75,18 @@ const Login = (props) => {
   }, [token])
 
   return (
-    <div>
-      <h1>Login</h1>
+    <form className='login-wrapp'>
+      <div className='title-login'>Login</div>
       <Input {...getControlProps('email', state)} onFocus={() => handleIsClickButton(false)} />
-      <Input {...getControlProps('password', state)} onFocus={() => handleIsClickButton(false)} />
-      <Button isBusy={fetching} onClick={() => confirmSighUp(state, props)}>
-        Login
-      </Button>
+      <Input {...getControlProps('password', state)} type='password' onFocus={() => handleIsClickButton(false)} />
+      <div className='button-wrapp'>
+        <Button isBusy={fetching} onClick={() => confirmSighUp(state, props)}>
+          Login
+        </Button>
+        <Link to='/signup'>or Sign Up</Link>
+      </div>
       {loginError && isClickButton && <div className='transaction-error'>{loginError}</div>}
-      <br />
-      <Link to='/signup'>or Sign Up</Link>
-    </div>
+    </form>
   )
 }
 

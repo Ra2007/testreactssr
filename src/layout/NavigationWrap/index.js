@@ -44,7 +44,7 @@ const NavigationWrap = (props) => {
   return (
     <div className='app-container'>
       <div className='top-nav'>
-        <div className='logo-nav'>
+        <div className='logo-nav' onClick={() => push('/')}>
           <h1>ParrotWings</h1>
         </div>
 

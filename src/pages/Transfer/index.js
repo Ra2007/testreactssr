@@ -70,8 +70,8 @@ const Transfer = (props) => {
   }, [transactionReplay])
 
   return (
-    <div>
-      <h1>Transfer page </h1>
+    <div className='login-wrapp'>
+      <div className='title-login'>Transfer page </div>
       <div className='input-wrap'>
         <Input
           label={'Name'}

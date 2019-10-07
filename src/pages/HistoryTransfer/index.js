@@ -1,4 +1,7 @@
 import React, {useEffect} from 'react'
+import Button from '../../elements/Button'
+
+import './styles.scss'
 
 const HistoryTransfer = (props) => {
   const {
@@ -18,13 +21,13 @@ const HistoryTransfer = (props) => {
   }, [])
 
   return (
-    <div>
-      <h1>HistoryTransfer page</h1>
+    <div className='login-wrapp'>
+      <div className='title-login'>History Transfer page</div>
       <table className='table-info'>
         <thead>
-          <tr>
+          <tr className='table-head'>
             <td>date / time</td>
-            <td>correspondent name</td>
+            <td>corr. name</td>
             <td>amount</td>
             <td>balance</td>
             <td></td>
@@ -40,9 +43,9 @@ const HistoryTransfer = (props) => {
                 <td>{`${tran.balance} PW`}</td>
                 <td>
                   {tran.amount < 0 && (
-                    <button onClick={() => transactionReplay({userName: tran.username, amount: -tran.amount})}>
-                      replay
-                    </button>
+                    <Button onClick={() => transactionReplay({userName: tran.username, amount: -tran.amount})}>
+                      Repeat transfer
+                    </Button>
                   )}
                 </td>
               </tr>
