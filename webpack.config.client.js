@@ -6,6 +6,7 @@ const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const {StatsWriterPlugin} = require('webpack-stats-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const baseConfig = require('./webpack.config.base')
 
@@ -47,6 +48,7 @@ module.exports = merge(baseConfig, {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new CopyPlugin([{from: './public/favicon.ico'}]),
     new StatsWriterPlugin({
       // filename: 'stats.json',
       stats: {
