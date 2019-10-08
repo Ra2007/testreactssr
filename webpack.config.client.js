@@ -1,6 +1,5 @@
 const path = require('path')
 const merge = require('webpack-merge')
-// const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const webpack = require('webpack')
@@ -30,18 +29,6 @@ module.exports = merge(baseConfig, {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
-    // minimizer: [
-    //   new UglifyJSPlugin({
-    //     cache: true,
-    //     parallel: true,
-    //     uglifyOptions: {
-    //       compress: false,
-    //       ecma: 6,
-    //       mangle: true,
-    //     },
-    //     sourceMap: false,
-    //   }),
-    // ],
   },
   plugins: [
     new CompressionPlugin(),
@@ -53,15 +40,12 @@ module.exports = merge(baseConfig, {
     }),
     new CopyPlugin([{from: './public/favicon.ico'}]),
     new StatsWriterPlugin({
-      // filename: 'stats.json',
       stats: {
         all: false,
         assets: true,
       },
     }),
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: 'styles.[chunkhash].css',
     }),
   ],
