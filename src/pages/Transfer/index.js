@@ -1,6 +1,9 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import T from 'prop-types'
 import Input from '../../elements/Input'
 import Button from '../../elements/Button'
+import TransactionTable from '../../components/TransactionTable'
+import UsersList from '../../components/UsersList'
 
 import './styles.scss'
 
@@ -12,8 +15,8 @@ const Transfer = (props) => {
   const [isSendButton, handleIsSendButton] = useState(false)
 
   const {
-    transfer: {users, fetching, transactionInfo, transactionError, transactionReplay},
-    user: {userInfo},
+    transfer: { users, fetching, transactionInfo, transactionError, transactionReplay },
+    user: { userInfo },
     getUsersName,
     clearUserList,
     transactionCreate,
@@ -44,7 +47,7 @@ const Transfer = (props) => {
 
   const createTransaction = () => {
     if (userInfo.balance >= currency) {
-      transactionCreate({name, amount: currency})
+      transactionCreate({ name, amount: currency })
       handleIsSendButton(true)
     } else {
       handleErrorCurrency(true)
@@ -80,16 +83,7 @@ const Transfer = (props) => {
           onBlur={() => onBlurInput()}
           onFocus={() => onFocusInput()}
         />
-        {Object.keys(users).length > 0 && isShowList && (
-          <div className='user-list'>
-            {name !== '' &&
-              Object.keys(users).map((idx) => (
-                <div className='user-item' key={users[idx].id} onClick={() => handleName(users[idx].name)}>
-                  {users[idx].name}
-                </div>
-              ))}
-          </div>
-        )}
+        <UsersList users={users} isShowList={isShowList} name={name} handleName={handleName} />
         <Input
           label={'Currency'}
           value={currency}
@@ -97,35 +91,50 @@ const Transfer = (props) => {
           error={errorCurrency && 'Input correct quantyti curency'}
         />
       </div>
-      <Button disabled={!(name && currency) || isSendButton} isBusy={fetching} onClick={() => createTransaction()}>
+      <Button
+        disabled={!(name && currency) || isSendButton}
+        isBusy={fetching}
+        onClick={() => createTransaction()}
+      >
         Send currency
       </Button>
-      {isSendButton && transactionError && <div className='transaction-error'>{transactionError}</div>}
+      {isSendButton && transactionError && (
+        <div className='transaction-error'>{transactionError}</div>
+      )}
       <div className='transaction-info-block'>
         {transactionInfo && isSendButton && !transactionError && (
-          <table className='table-info'>
-            <caption> last transaction</caption>
-            <thead>
-              <tr>
-                <td>date / time</td>
-                <td>correspondent name</td>
-                <td>amount</td>
-                <td>balance</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{transactionInfo.date}</td>
-                <td>{transactionInfo.username}</td>
-                <td>{`${transactionInfo.amount} PW`}</td>
-                <td>{`${transactionInfo.balance} PW`}</td>
-              </tr>
-            </tbody>
-          </table>
+          <TransactionTable transactionInfo={[transactionInfo]} caption={'last transaction'} />
         )}
       </div>
     </div>
   )
+}
+
+Transfer.propTypes = {
+  users: T.arrayOf(
+    T.shape({
+      id: T.number,
+      name: T.string,
+    })
+  ),
+  fetching: T.bool,
+  transactionInfo: T.shape({
+    date: T.string,
+    username: T.string,
+    amount: T.number,
+    balance: T.number,
+  }),
+  transactionError: T.bool,
+  transactionReplay: T.func,
+  userInfo: T.shape({
+    id: T.number,
+    name: T.string,
+    email: T.string,
+    balance: T.number,
+  }),
+  getUsersName: T.func,
+  clearUserList: T.func,
+  transactionCreate: T.func,
 }
 
 export default Transfer

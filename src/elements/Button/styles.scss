@@ -5,6 +5,10 @@
   box-shadow: 0 0.5px 0.5px 0 rgba(0, 0, 0, 0.15);
   border: solid 0.5px #4ebfd7;
   background-color: #4ebfd7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
   &:active {
     opacity: 0.7;
   }
@@ -17,7 +21,8 @@
 .disabled {
   border-image-source: linear-gradient(to bottom, #d4d9de, #7f8083);
   border-image-slice: 1;
-  background-image: linear-gradient(to bottom, #dce2e9, #c2c5c7), linear-gradient(to bottom, #d4d9de, #7f8083);
+  background-image: linear-gradient(to bottom, #dce2e9, #c2c5c7),
+    linear-gradient(to bottom, #d4d9de, #7f8083);
   background-origin: border-box;
   &:active {
     opacity: 1;

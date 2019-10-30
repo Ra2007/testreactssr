@@ -1,6 +1,6 @@
-import usersNameRequest from '../../fetch/requests/usersName'
-import createTransactionRequest from '../../fetch/requests/createTransaction'
-import listTransactionRequest from '../../fetch/requests/listTransaction'
+import usersNameRequest from '../../api/usersName'
+import createTransactionRequest from '../../api/createTransaction'
+import listTransactionRequest from '../../api/listTransaction'
 
 import {
   SET_USERS_LIST,
@@ -14,20 +14,18 @@ import {
   TRANSACTION_REPLAY_SET,
 } from '../types'
 
-export const getUsersName = (filter) => (dispatch, getState) => {
-  const {token} = getState().auth
-  const body = {filter}
+export const getUsersName = (filter) => (dispatch) => {
+  const body = { filter }
 
-  return usersNameRequest({body, token})
-    .then((data) => {
-      console.log(data)
+  return usersNameRequest({ body })
+    .then(({ data }) => {
       dispatch({
         type: SET_USERS_LIST,
         payload: data,
       })
     })
-    .catch((error) => {
-      console.log(error)
+    .catch(({ response }) => {
+      console.log(response.data)
     })
 }
 
@@ -37,46 +35,42 @@ export const clearUserList = () => (dispatch) => {
   })
 }
 
-export const transactionCreate = (body) => (dispatch, getState) => {
-  const {token} = getState().auth
-
+export const transactionCreate = (body) => (dispatch) => {
   dispatch({
     type: TRANSACTION_FETCHING,
   })
 
-  return createTransactionRequest({body, token})
-    .then((data) => {
+  return createTransactionRequest({ body })
+    .then(({ data }) => {
       dispatch({
         type: TRANSACTION_INFO_SET,
         payload: data.trans_token,
       })
     })
-    .catch((error) => {
+    .catch(({ response }) => {
       dispatch({
         type: TRANSACTION_INFO_SET_ERROR,
-        payload: error.extra,
+        payload: response.data,
       })
     })
 }
 
-export const getTransactionList = () => (dispatch, getState) => {
-  const {token} = getState().auth
-
+export const getTransactionList = () => (dispatch) => {
   dispatch({
     type: TRANSACTION_LIST_FETCHING,
   })
 
-  return listTransactionRequest({token})
-    .then((data) => {
+  return listTransactionRequest()
+    .then(({ data }) => {
       dispatch({
         type: TRANSACTION_LIST_SET,
         payload: data.trans_token,
       })
     })
-    .catch((error) => {
+    .catch(({ response }) => {
       dispatch({
         type: TRANSACTION_LIST_ERROR,
-        payload: error.extra,
+        payload: response.data,
       })
     })
 }

@@ -1,14 +1,15 @@
-import React, {useEffect} from 'react'
-import Button from '../../elements/Button'
+import React, { useEffect } from 'react'
+import T from 'prop-types'
+import TransactionTable from '../../components/TransactionTable'
 
 import './styles.scss'
 
 const HistoryTransfer = (props) => {
   const {
-    history: {push},
+    history: { push },
     getTransactionList,
     setTransactionReplay,
-    transfer: {transactionList},
+    transfer: { transactionList },
   } = props
 
   const transactionReplay = (params) => {
@@ -17,43 +18,29 @@ const HistoryTransfer = (props) => {
   }
 
   useEffect(() => {
-    getTransactionList()
+    setTimeout(() => getTransactionList(), 0)
   }, [])
 
   return (
     <div className='login-wrapp'>
       <div className='title-login'>History Transfer page</div>
-      <table className='table-info'>
-        <thead>
-          <tr className='table-head'>
-            <td>date / time</td>
-            <td>corr. name</td>
-            <td>amount</td>
-            <td>balance</td>
-            <td></td>
-          </tr>
-        </thead>
-        <tbody>
-          {transactionList &&
-            transactionList.map((tran) => (
-              <tr key={tran.id}>
-                <td>{tran.date}</td>
-                <td>{tran.username}</td>
-                <td>{`${tran.amount} PW`}</td>
-                <td>{`${tran.balance} PW`}</td>
-                <td>
-                  {tran.amount < 0 && (
-                    <Button onClick={() => transactionReplay({userName: tran.username, amount: -tran.amount})}>
-                      Repeat transfer
-                    </Button>
-                  )}
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <TransactionTable transactionInfo={transactionList} replayBtn={transactionReplay} />
     </div>
   )
 }
 
 export default HistoryTransfer
+
+HistoryTransfer.propTypes = {
+  push: T.func,
+  getTransactionList: T.func,
+  setTransactionReplay: T.func,
+  transactionList: T.arrayOf(
+    T.shape({
+      date: T.string,
+      username: T.string,
+      amount: T.number,
+      balance: T.number,
+    })
+  ),
+}

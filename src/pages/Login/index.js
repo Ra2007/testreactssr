@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import T from 'prop-types'
+import { Link } from 'react-router-dom'
 import Input from '../../elements/Input'
 import Button from '../../elements/Button'
-import {getControlProps, validateForm, validators, useForm} from '../../helpers/forms'
+import { getControlProps, validateForm, validators, useForm } from '../../helpers/forms'
 
 import './styles.scss'
 
@@ -11,8 +12,8 @@ const confirmSighUp = (state, props) => {
   if (triggerErrors.length !== 0) {
     return triggerErrors.map((f) => f())
   } else {
-    const {password, email} = state
-    const body = {password, email}
+    const { password, email } = state
+    const body = { password, email }
 
     state.handleIsClickButton(true)
     props.loginUser(body)
@@ -51,22 +52,22 @@ const useLogin = () => {
   const [formState, formHandlers] = useForm(formValues)
   const [controlsState, controlsHandlers] = useControls()
 
-  const state = {...formState, ...controlsState}
-  const handlers = {...formHandlers, ...controlsHandlers}
+  const state = { ...formState, ...controlsState }
+  const handlers = { ...formHandlers, ...controlsHandlers }
 
   return [state, handlers]
 }
 
 const Login = (props) => {
   const [orderState, orderHandlers] = useLogin()
-  const state = {...orderState, ...orderHandlers}
+  const state = { ...orderState, ...orderHandlers }
 
   const {
-    auth: {fetching, token, loginError},
-    history: {push},
+    auth: { fetching, token, loginError },
+    history: { push },
   } = props
 
-  const {isClickButton, handleIsClickButton} = state
+  const { isClickButton, handleIsClickButton } = state
 
   useEffect(() => {
     if (token) {
@@ -78,7 +79,11 @@ const Login = (props) => {
     <form className='login-wrapp'>
       <div className='title-login'>Login</div>
       <Input {...getControlProps('email', state)} onFocus={() => handleIsClickButton(false)} />
-      <Input {...getControlProps('password', state)} type='password' onFocus={() => handleIsClickButton(false)} />
+      <Input
+        {...getControlProps('password', state)}
+        type='password'
+        onFocus={() => handleIsClickButton(false)}
+      />
       <div className='button-wrapp'>
         <Button isBusy={fetching} onClick={() => confirmSighUp(state, props)}>
           Login
@@ -91,3 +96,10 @@ const Login = (props) => {
 }
 
 export default Login
+
+Login.propTypes = {
+  fetching: T.bool,
+  token: T.string,
+  loginError: T.string,
+  push: T.func,
+}

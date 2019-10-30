@@ -1,29 +1,21 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import _ from 'lodash'
-
+import T from 'prop-types'
 import Loader from '../Loader'
 
 import './styles.scss'
 
 export default function Button(props) {
-  const {
-    children,
-    className = '',
-    contentClassName,
-    disabled,
-    type,
-    theme = '',
-    size,
-    showFocus,
-    isBusy,
-    ...otherProps
-  } = props
+  const { children, className, contentClassName, disabled, theme, isBusy, ...otherProps } = props
 
-  const classBtn = ['button', `${className}`, `${theme}`, `${(disabled || isBusy) && 'disabled'}`].join(' ')
+  const classBtn = [
+    'button',
+    `${className}`,
+    `${theme}`,
+    `${(disabled || isBusy) && 'disabled'}`,
+  ].join(' ')
   const labelBtn = `label ${contentClassName}`
   return (
-    <button disabled={disabled || isBusy} className={classBtn} type={type} {..._.omit(otherProps, ['busyManagerKey'])}>
+    <div disabled={disabled || isBusy} className={classBtn} {...otherProps}>
       {!isBusy ? (
         <div className={labelBtn}>{children}</div>
       ) : (
@@ -31,6 +23,20 @@ export default function Button(props) {
           <Loader />
         </div>
       )}
-    </button>
+    </div>
   )
+}
+
+Button.propTypes = {
+  children: T.string,
+  className: T.string,
+  contentClassName: T.string,
+  disabled: T.bool,
+  theme: T.string,
+  isBusy: T.bool,
+}
+
+Button.defaultProps = {
+  className: '',
+  theme: '',
 }

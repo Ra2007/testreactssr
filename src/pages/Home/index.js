@@ -1,11 +1,12 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import T from 'prop-types'
+import { Link } from 'react-router-dom'
 
 import './styles.scss'
 
 const Home = (props) => {
   const {
-    auth: {token},
+    auth: { token },
   } = props
 
   return !!token ? (
@@ -38,3 +39,7 @@ const Home = (props) => {
 }
 
 export default Home
+
+Home.propTypes = {
+  token: T.string,
+}

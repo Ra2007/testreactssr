@@ -1,27 +1,25 @@
-import userInfoRequest from '../../fetch/requests/userInfo'
-import {START_USER_INFO, SET_USER_INFO, SET_USER_INFO_ERROR, AUTH_LOGOUT} from '../types'
+import userInfoRequest from '../../api/userInfo'
+import { START_USER_INFO, SET_USER_INFO, SET_USER_INFO_ERROR, AUTH_LOGOUT } from '../types'
 
-export const getUserInfo = () => (dispatch, getState) => {
-  const {token} = getState().auth
-
+export const getUserInfo = () => (dispatch) => {
   dispatch({
     type: START_USER_INFO,
   })
 
-  return userInfoRequest({token})
-    .then((data) => {
+  return userInfoRequest()
+    .then(({ data }) => {
       dispatch({
         type: SET_USER_INFO,
         payload: data.user_info_token,
       })
     })
-    .catch((error) => {
+    .catch(({ response }) => {
       dispatch({
         type: SET_USER_INFO_ERROR,
-        payload: error.extra,
+        payload: response.data,
       })
 
-      if (error) {
+      if (response) {
         dispatch({
           type: AUTH_LOGOUT,
         })

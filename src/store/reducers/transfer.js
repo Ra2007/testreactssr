@@ -11,7 +11,7 @@ import {
 } from '../types'
 
 const initialState = {
-  users: {},
+  users: [],
   transactionInfo: {},
   fetching: false,
   transactionError: null,
@@ -21,7 +21,7 @@ const initialState = {
   transactionReplay: {},
 }
 export default (state = initialState, action) => {
-  const {type, payload} = action
+  const { type, payload } = action
   switch (type) {
     case SET_USERS_LIST:
       return {
@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
     case CLEAR_USER_LIST:
       return {
         ...state,
-        users: {},
+        users: [],
       }
 
     case TRANSACTION_FETCHING:

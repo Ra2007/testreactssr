@@ -1,6 +1,12 @@
-import authRegistrRequest from '../../fetch/requests/authRegistr'
-import authLoginRequest from '../../fetch/requests/authLogin'
-import {SET_AUTH_TOKEN, SET_SIGNUP_ERROR, SET_LOGIN_ERROR, AUTH_FETCHING_START, AUTH_LOGOUT} from '../types'
+import authRegistrRequest from '../../api/authRegistr'
+import authLoginRequest from '../../api/authLogin'
+import {
+  SET_AUTH_TOKEN,
+  SET_SIGNUP_ERROR,
+  SET_LOGIN_ERROR,
+  AUTH_FETCHING_START,
+  AUTH_LOGOUT,
+} from '../types'
 
 export const userLogout = () => (dispatch) => {
   return dispatch({
@@ -9,48 +15,45 @@ export const userLogout = () => (dispatch) => {
 }
 
 export const registrUser = (authData) => (dispatch) => {
-  const body = {...authData}
+  const body = { ...authData }
 
   dispatch({
     type: AUTH_FETCHING_START,
   })
 
-  return authRegistrRequest({body})
-    .then((data) => {
-      console.log(data)
+  return authRegistrRequest({ body })
+    .then(({ data }) => {
       dispatch({
         type: SET_AUTH_TOKEN,
         payload: data.id_token,
       })
     })
-    .catch((error) => {
-      console.log(error)
-
+    .catch(({ response }) => {
       dispatch({
         type: SET_SIGNUP_ERROR,
-        payload: error.extra,
+        payload: response.data,
       })
     })
 }
 
 export const loginUser = (authData) => (dispatch) => {
-  const body = {...authData}
+  const body = { ...authData }
 
   dispatch({
     type: AUTH_FETCHING_START,
   })
 
-  return authLoginRequest({body})
-    .then((data) => {
+  return authLoginRequest({ body })
+    .then(({ data }) => {
       dispatch({
         type: SET_AUTH_TOKEN,
         payload: data.id_token,
       })
     })
-    .catch((error) => {
+    .catch(({ response }) => {
       dispatch({
         type: SET_LOGIN_ERROR,
-        payload: error.extra,
+        payload: response.data,
       })
     })
 }

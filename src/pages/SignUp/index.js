@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import T from 'prop-types'
+import { Link } from 'react-router-dom'
 import Input from '../../elements/Input'
 import Button from '../../elements/Button'
-import {getControlProps, validateForm, validators, useForm} from '../../helpers/forms'
+import { getControlProps, validateForm, validators, useForm } from '../../helpers/forms'
 
 import './styles.scss'
 
@@ -12,8 +13,8 @@ const confirmSighUp = (state, props) => {
   if (triggerErrors.length !== 0) {
     return triggerErrors.map((f) => f())
   } else {
-    const {userName, password, email} = state
-    const body = {username: userName, password, email}
+    const { userName, password, email } = state
+    const body = { username: userName, password, email }
 
     state.handleIsClickButton(true)
     props.registrUser(body)
@@ -68,22 +69,22 @@ const useSignUp = () => {
   const [formState, formHandlers] = useForm(formValues)
   const [controlsState, controlsHandlers] = useControls()
 
-  const state = {...formState, ...controlsState}
-  const handlers = {...formHandlers, ...controlsHandlers}
+  const state = { ...formState, ...controlsState }
+  const handlers = { ...formHandlers, ...controlsHandlers }
 
   return [state, handlers]
 }
 
 const SignUp = (props) => {
   const [orderState, orderHandlers] = useSignUp()
-  const state = {...orderState, ...orderHandlers}
+  const state = { ...orderState, ...orderHandlers }
 
   const {
-    auth: {fetching, token, signUpError},
-    history: {push},
+    auth: { fetching, token, signUpError },
+    history: { push },
   } = props
 
-  const {isClickButton, handleIsClickButton} = state
+  const { isClickButton, handleIsClickButton } = state
 
   useEffect(() => {
     if (token) {
@@ -99,7 +100,11 @@ const SignUp = (props) => {
 
       <Input {...getControlProps('email', state)} onFocus={() => handleIsClickButton(false)} />
 
-      <Input {...getControlProps('password', state)} type='password' onFocus={() => handleIsClickButton(false)} />
+      <Input
+        {...getControlProps('password', state)}
+        type='password'
+        onFocus={() => handleIsClickButton(false)}
+      />
 
       <Input
         {...getControlProps('confirmPassword', state)}
@@ -118,3 +123,10 @@ const SignUp = (props) => {
 }
 
 export default SignUp
+
+SignUp.propTypes = {
+  fetching: T.bool,
+  token: T.string,
+  signUpError: T.string,
+  push: T.func,
+}

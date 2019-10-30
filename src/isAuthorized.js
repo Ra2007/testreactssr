@@ -1,14 +1,13 @@
-import React, {PureComponent} from 'react'
-import T from 'prop-types'
-import {connect} from 'react-redux'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 import Login from './pages/Login/index.connector'
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
 
 function isAuthorizedWrapper(Component) {
   return class IsAuthorized extends PureComponent {
     render() {
       const {
-        auth: {token},
+        auth: { token },
       } = this.props
 
       if (!token) {
