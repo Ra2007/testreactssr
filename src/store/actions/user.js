@@ -19,10 +19,8 @@ export const getUserInfo = () => (dispatch) => {
         payload: response.data,
       })
 
-      if (response) {
-        dispatch({
-          type: AUTH_LOGOUT,
-        })
-      }
+      dispatch({
+        type: AUTH_LOGOUT,
+      })
     })
 }

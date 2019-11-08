@@ -1,13 +1,19 @@
-import {SET_AUTH_TOKEN, SET_SIGNUP_ERROR, SET_LOGIN_ERROR, AUTH_FETCHING_START, AUTH_LOGOUT} from '../types'
+import {
+  SET_AUTH_TOKEN,
+  SET_SIGNUP_ERROR,
+  SET_LOGIN_ERROR,
+  AUTH_FETCHING_START,
+  AUTH_LOGOUT,
+} from '../types'
 
-const initialState = {
+export const initialState = {
   token: null,
   signUpError: null,
   loginError: null,
   fetching: false,
 }
 export default (state = initialState, action) => {
-  const {type, payload} = action
+  const { type, payload } = action
   switch (type) {
     case AUTH_LOGOUT:
       return {

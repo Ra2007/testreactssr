@@ -1,6 +1,7 @@
 import {
   SET_USERS_LIST,
   CLEAR_USER_LIST,
+  ERROR_USER_LIST,
   TRANSACTION_FETCHING,
   TRANSACTION_INFO_SET,
   TRANSACTION_INFO_SET_ERROR,
@@ -10,8 +11,9 @@ import {
   TRANSACTION_REPLAY_SET,
 } from '../types'
 
-const initialState = {
+export const initialState = {
   users: [],
+  usersError: null,
   transactionInfo: {},
   fetching: false,
   transactionError: null,
@@ -32,6 +34,13 @@ export default (state = initialState, action) => {
     case CLEAR_USER_LIST:
       return {
         ...state,
+        users: [],
+      }
+
+    case ERROR_USER_LIST:
+      return {
+        ...state,
+        usersError: payload,
         users: [],
       }
 

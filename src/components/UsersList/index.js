@@ -20,7 +20,7 @@ const UsersList = ({ users, name, handleName, isShowList }) => {
 export default UsersList
 
 UsersList.propTypes = {
-  users: T.arrayOf(T.shape({ id: T.number, name: T.string })),
+  users: T.arrayOf(T.shape({ id: T.number, name: T.string })).isRequired,
   name: T.string,
   handleName: T.func,
   isShowList: T.bool,

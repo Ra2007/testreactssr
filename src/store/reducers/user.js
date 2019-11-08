@@ -1,12 +1,12 @@
-import {START_USER_INFO, SET_USER_INFO, SET_USER_INFO_ERROR, AUTH_LOGOUT} from '../types'
+import { START_USER_INFO, SET_USER_INFO, SET_USER_INFO_ERROR, AUTH_LOGOUT } from '../types'
 
-const initialState = {
+export const initialState = {
   userInfo: null,
   userInfoError: null,
   userInfoFetching: false,
 }
 export default (state = initialState, action) => {
-  const {type, payload} = action
+  const { type, payload } = action
   switch (type) {
     case AUTH_LOGOUT:
       return {

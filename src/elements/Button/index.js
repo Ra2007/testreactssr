@@ -11,11 +11,11 @@ export default function Button(props) {
     'button',
     `${className}`,
     `${theme}`,
-    `${(disabled || isBusy) && 'disabled'}`,
+    `${disabled || isBusy ? 'disabled' : ''}`,
   ].join(' ')
   const labelBtn = `label ${contentClassName}`
   return (
-    <div disabled={disabled || isBusy} className={classBtn} {...otherProps}>
+    <div className={classBtn} {...otherProps}>
       {!isBusy ? (
         <div className={labelBtn}>{children}</div>
       ) : (

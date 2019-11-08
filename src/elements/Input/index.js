@@ -5,7 +5,8 @@ import './styles.scss'
 
 export default function Input(props) {
   const { className, handleInput, value, id, error, label, disabled, onBlur, onFocus, type } = props
-  const style = `input ${className ? className : ''} ${error && 'error'}`
+
+  const style = `input ${className ? className : ''} ${error ? 'error' : ''}`
 
   return (
     <main className='input-wrapp'>

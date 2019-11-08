@@ -5,6 +5,7 @@ import listTransactionRequest from '../../api/listTransaction'
 import {
   SET_USERS_LIST,
   CLEAR_USER_LIST,
+  ERROR_USER_LIST,
   TRANSACTION_FETCHING,
   TRANSACTION_INFO_SET,
   TRANSACTION_INFO_SET_ERROR,
@@ -25,12 +26,15 @@ export const getUsersName = (filter) => (dispatch) => {
       })
     })
     .catch(({ response }) => {
-      console.log(response.data)
+      dispatch({
+        type: ERROR_USER_LIST,
+        payload: response.data,
+      })
     })
 }
 
 export const clearUserList = () => (dispatch) => {
-  dispatch({
+  return dispatch({
     type: CLEAR_USER_LIST,
   })
 }
@@ -76,7 +80,7 @@ export const getTransactionList = () => (dispatch) => {
 }
 
 export const setTransactionReplay = (params) => (dispatch) => {
-  dispatch({
+  return dispatch({
     type: TRANSACTION_REPLAY_SET,
     payload: params,
   })

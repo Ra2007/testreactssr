@@ -50,7 +50,7 @@ TransactionTable.propTypes = {
       amount: T.number,
       balance: T.number,
     })
-  ),
+  ).isRequired,
   caption: T.string,
   replayBtn: T.func,
 }

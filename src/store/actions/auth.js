@@ -14,9 +14,7 @@ export const userLogout = () => (dispatch) => {
   })
 }
 
-export const registrUser = (authData) => (dispatch) => {
-  const body = { ...authData }
-
+export const registrUser = (body) => (dispatch) => {
   dispatch({
     type: AUTH_FETCHING_START,
   })
